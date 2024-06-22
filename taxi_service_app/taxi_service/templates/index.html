@@ -1,0 +1,14 @@
+{% extends 'templates/base.html' %}
+
+
+{% block content %}
+<div class="d-grid gap-2 bg-color-secondary">
+    <h3 class="text-center">
+        <p>Главная страница сервиса службы такси TaxiService.</p>
+        <p class="fw-light">Чтобы начать работу, необходимо нажать "Войти в систему".</p>
+    </h3>
+    <button class="btn btn-outline-success" onclick="location.href={% url 'login' %}">
+        Войти в систему
+    </button>
+</div>
+{% endblock %}

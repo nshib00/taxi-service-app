@@ -1,0 +1,43 @@
+{% extends 'templates/taxi_admin/base_content.html' %}
+
+
+{% block page_content %}
+<div class="d-grid gap-2" style="height: 20%; top-margin: 20%; bottom-margin: 20%;">
+    <form class="row p-3" action="{% url 'admin_drivers_search' %}" method="get">
+        <div class="col-3">
+            <input class="form-control" type="search" name="name" placeholder="Поиск водителя по имени">
+        </div>
+        <div class="col-4">
+            <input class="form-control" type="search" name="city" placeholder="Поиск водителя по городу">
+        </div>
+        <div class="col-lg-4">
+            <button type="submit" class="btn btn-outline-primary">Найти</button>
+        </div>
+    </form>
+    </div>
+    <p>Всего водителей: {{ drivers_count }}</p>
+    <table class="table">
+        <th scope="col">ФИО</th>
+        <th scope="col">Город</th>
+        <th scope="col">Рейтинг</th>
+        <th scope="col">Паспорт</th>
+        <th scope="col">ВУ</th>
+        <th scope="col">Дата выдачи ВУ</th>
+
+        {% for driver in drivers %}
+            <tr>
+                <td>{{ driver.fio }}</td>
+                <td>{{ driver.city }}</td>
+                {% if driver.rating == 0 %}
+                    <td>-</td>
+                {% else %}
+                    <td>{{ driver.rating }}</td>
+                {% endif %}
+                <td>{{ driver.passport }}</td>
+                <td>{{ driver.driver_licence }}</td>
+                <td>{{ driver.driver_licence_date }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

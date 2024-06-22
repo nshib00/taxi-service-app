@@ -1,0 +1,33 @@
+{% extends 'templates/taxi_admin/base_content.html' %}
+
+
+{% block page_content %}
+<div class="d-grid gap-2" style="height: 20%; top-margin: 20%; bottom-margin: 20%;">
+    <form class="row p-3" action="{% url 'admin_vehicles_search' %}" method="get">
+        <div class="col-3">
+            <input class="form-control" type="search" name="reg_number" placeholder="Поиск ТС по рег.номеру">
+        </div>
+        <div class="col-lg-4">
+            <button type="submit" class="btn btn-outline-primary">Найти</button>
+        </div>
+    </form>
+    </div>
+    <p>Всего транспортных средств: {{ vehicles_count }}</p>
+    <table class="table">
+        <th scope="col">Рег. номер</th>
+        <th scope="col">Марка</th>
+        <th scope="col">Цвет</th>
+        <th scope="col">Собственник</th>
+
+        {% for vehicle in vehicles %}
+            <tr>
+                <td>{{ vehicle.reg_number }}</td>
+                <td>{{ vehicle.model }}</td>
+                <td>{{ vehicle.color }}</td>
+                <td>{{ vehicle.owner }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
+

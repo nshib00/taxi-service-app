@@ -1,0 +1,23 @@
+{% extends 'templates/base.html' %}
+
+
+{% block content %}
+<style>
+    a:hover, a.success:hover {
+        color: white;
+        transition: 0.15s;
+    }
+    a.success {
+        color: green;
+    }
+    th, td {
+        text-align: center;
+    }
+</style>
+<div class="container gap-2" style="height: 20%; top-margin: 20%; bottom-margin: 20%;">
+  {% block heading %}
+  {% endblock %}
+  {% block page_content %}
+  {% endblock %}
+</div>
+{% endblock %}

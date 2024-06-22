@@ -1,0 +1,45 @@
+{% extends 'templates/dispatcher/base_content.html' %}
+
+
+{% block page_content %}
+<div class="container" style="height: 20%; top-margin: 20%; bottom-margin: 20%;">
+    <form class="row p-3" action="{% url 'dispatcher_free_drivers_search' %}" method="get">
+        <div class="col-3">
+            <input class="form-control" type="search" name="name" placeholder="Поиск водителя по имени">
+        </div>
+        <div class="col-4">
+            <input class="form-control" type="search" name="city" placeholder="Поиск водителя по городу">
+        </div>
+        <div class="col-lg-4">
+            <button type="submit" class="btn btn-outline-primary">Найти</button>
+        </div>
+    </form>
+    </div>
+    <p>Количество водителей: {{ drivers_count }}</p>
+    <table class="table">
+        <th scope="col">ФИО</th>
+        <th scope="col">Город</th>
+        <th scope="col">Марка ТС</th>
+        <th scope="col">Номер ТС</th>
+        <th scope="col">Цвет ТС</th>
+        <th scope="col">Начало смены</th>
+        <th scope="col">Рейтинг</th>
+
+        {% for shift in shifts %}
+            <tr>
+                <td>{{ shift.driver_id.fio }}</td>
+                <td>{{ shift.driver_id.city }}</td>
+                <td>{{ shift.vehicle_id.model }}</td>
+                <td>{{ shift.vehicle_id.reg_number }}</td>
+                <td>{{ shift.vehicle_id.color }}</td>
+                <td>{{ shift.shift_begin_date }}</td>
+                {% if shift.driver_id.rating == 0 %}
+                    <td>-</td>
+                {% else %}
+                    <td>{{ shift.driver_id.rating }}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'templates/driver/base_content.html' %}
+
+
+{% block page_content %}
+<div class="d-grid gap-2" style="height: 20%; top-margin: 20%; bottom-margin: 20%;">
+    <div class="row">
+      <div class="col-auto">
+        <p>Фильтр по статусу: </p>
+      </div>
+    <div class="col-sm-2">
+       <form class="d-grid gap-2" action="{% url 'driver_orders_search' %}" method="get">
+               <div class="row">
+               {{ form.status }}
+            </div>
+            <div class="row">
+               <button class="btn btn-outline-primary">Применить</button>
+            </div>
+        </form>
+    </div>
+    <table class="table">
+        <th scope="col">Номер заказа</th>
+        <th scope="col">Время начала</th>
+        <th scope="col">Время завершения</th>
+        <th scope="col">Номер телефона клиента</th>
+        <th scope="col">Оценка</th>
+        <th scope="col">Статус</th>
+        <th scope="col">Адрес посадки</th>
+        <th scope="col">Адрес назначения</th>
+        {% for order in orders %}
+            <tr>
+                <td>{{ order.order_code }}</td>
+                <td>{{ order.order_begin_date }}</td>
+                <td>{{ order.order_end_date }}</td>
+                <td>{{ order.client_phone_number }}</td>
+                <td>
+                    {% if order.mark == 0 %}
+                    {% else %}
+                    {{ order.mark }}
+                    {% endif %}
+                </td>
+                <td>{{ order.status }}</td>
+                <td>{{ order.boarding_address }}</td>
+                <td>{{ order.destination_address }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

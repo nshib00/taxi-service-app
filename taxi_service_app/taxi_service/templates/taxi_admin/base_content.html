@@ -1,0 +1,13 @@
+{% extends 'templates/page_with_content.html' %}
+
+{% block heading %}
+<div class="row align-content-md-top">
+      <div class="col text-start">
+        <h2 class="pb-3">{{ header_text }}</h2>
+      </div>
+    <div class="col text-end">
+      <button id="back_btn" class="btn btn-outline-primary" onclick="location.href={% url 'taxi_admin' %}">Назад</button>
+</div>
+{% endblock %}
+{% block page_content %}
+{% endblock %}

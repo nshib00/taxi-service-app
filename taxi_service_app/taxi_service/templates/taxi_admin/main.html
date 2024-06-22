@@ -1,0 +1,35 @@
+{% extends 'templates/taxi_admin/base_content.html' %}
+
+
+{% block page_content %}
+<div class="d-grid gap-2 pt-3" style="height: 20%; top-margin: 20%; bottom-margin: 20%;" xmlns="http://www.w3.org/1999/html">
+    <h4 class="text-center">Регистрация новых водителей и транпортных средств</h4>
+    <div class="btn btn-outline-success">
+        <a class="success text-decoration-none" href="http://127.0.0.1:8000/admin/">
+            Панель администрирования
+        </a>
+    </div>
+    <hr>
+    <h4 class="text-center">Справочники</h4>
+    <div class="btn btn-outline-primary">
+        <a class="text-decoration-none" href="{% url 'admin_drivers' %}" style="">
+            Справочник водителей
+        </a>
+    </div>
+    <div class="btn btn-outline-primary">
+        <a class="text-decoration-none" href="{% url 'admin_vehicles' %}" style="">
+            Справочник транспортных средств
+        </a>
+    </div>
+    <div class="btn btn-outline-primary">
+        <a class="text-decoration-none" href="{% url 'admin_shifts' %}" style="">
+            Справочник смен
+        </a>
+    </div>
+    <div class="btn btn-outline-primary">
+        <a class="text-decoration-none" href="{% url 'admin_orders' %}" style="">
+            Справочник заказов
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'templates/driver/base_content.html' %}
+{% load taxi_service_tags %}
+
+
+{% block page_content %}
+<div class="d-grid gap-2" style="height: 20%; top-margin: 20%; bottom-margin: 20%;">
+    <form method="post" action="{% url 'driver_shift_create' %}">
+        {% csrf_token %}
+        <p>Время: {% get_current_time %}</p>
+        <div class="p-4 d-grid gap-2 justify-content-md-left">
+            <div class="form-error">{{ form.non_field_errors }}</div>
+            Водитель: {{ form.driver_id }}
+            Транспортное средство: {{ form.vehicle_id }}
+            <button type="submit" class="btn btn-outline-success">Открыть смену</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

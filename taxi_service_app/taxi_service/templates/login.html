@@ -1,0 +1,18 @@
+{% extends 'templates/base.html' %}
+
+
+{% block content %}
+    <form method="post" style="height: 20%; top-margin: 20%; bottom-margin: 20%;">
+        {% csrf_token %}
+        <h3 class="text-center">
+            <p>Вход в систему.</p>
+            <p class="fw-lighter">Введите Ваши логин и пароль.</p>
+        </h3>
+        <div class="p-4 d-grid gap-2 justify-content-md-center" style="border-radius: 5px; border: 1px solid gray;">
+            <div class="form-error">{{ form.non_field_errors }}</div>
+            {{ form.username }}
+            {{ form.password }}
+            <button class="btn btn-outline-success">Войти</button>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% load static %}
+
+
+<html>
+    <head>
+    <title>{% block title %}TaxiService{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'src/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'styles.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'src/bootstrap/js/bootstrap.min.js' %}"></script>
+    </head>
+    <body>
+        <div id="header" class="bg-dark text-white p-2" style="font-weight: 300; font-size: 1.5rem; padding-left: 40px;">
+            <div class="row align-items-center justify-content-between m-2">
+                <div class="col-md-auto">
+                    <a class="text-decoration-none text-white" href="{% url 'main' %}">TaxiService</a>
+                </div>
+                <div class="col-md-auto"></div>
+                {% if request.user.is_authenticated %}
+                <div class="d-flex col-md-auto align-items-center">
+                    <p class="fw-light text p-2" style="margin: 0; font-size: 17px;">
+                        {% if not user.groups.all %}
+                            {{ user.first_name }} | Администратор
+                        {% else %}
+                            {{ user.first_name }} | {{ user.groups.all.0 }}
+                        {% endif %}
+                    </p>
+                    <form class="mb-2" method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-outline-primary align-items-center" style="font-size: 17px;" value="Выйти">
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+    <div class="d-grid gap-2">
+        <div class="container" style="padding-top: 20px;">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+<!--        <script>-->
+<!--            if ($(document).height() <= $(window).height())-->
+<!--            $("footer.footer").addClass("navbar-fixed-bottom");-->
+<!--        </script>-->
+
+    <footer class="text-center bg-dark text-white fixed-bottom">
+    <p>2024 TaxiService</p>
+    </footer>
+
+    </body>
+</html>

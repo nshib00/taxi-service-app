@@ -1,0 +1,22 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+{% block extrastyle %}
+  <link href="{% static 'css/admin/admin.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'src/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+  <script src="{% static 'src/bootstrap/js/bootstrap.min.js' %}"></script>
+{% endblock %}
+
+{% block branding %}
+<div id="site-name" style="color: white;">
+  <a href="{% url 'admin:index' %}">TaxiService | {{ site_header|default:_('Django administration') }}</a>
+</div>
+
+{% if user.is_anonymous %}
+  {% include "admin/color_theme_toggle.html" %}
+{% endif %}
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

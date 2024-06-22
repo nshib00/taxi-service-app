@@ -1,0 +1,59 @@
+{% extends 'templates/taxi_admin/base_content.html' %}
+
+
+{% block page_content %}
+<div class="d-grid gap-2" style="height: 20%; top-margin: 20%; bottom-margin: 20%;">
+    <form class="row p-3" action="{% url 'admin_shifts_search' %}" method="get">
+        <div class="col-3">
+            <input class="form-control" type="search" name="driver_name" placeholder="Поиск смен по водителю">
+        </div>
+        <div class="col-auto">
+            <input class="form-control" type="search" name="city" placeholder="Поиск смен по городу">
+        </div>
+        <div class="col-2">
+            <button class="btn btn-outline-primary">Применить</button>
+        </div>
+    </form>
+    <p> Всего смен: {{ shifts_count }}</p>
+    {{ shifts_orders_count_list }}
+    <table class="table pt-3">
+        <th scope="col">Код смены</th>
+        <th scope="col">Водитель</th>
+        <th scope="col">Город</th>
+        <th scope="col">Модель ТС</th>
+        <th scope="col">Рег. номер ТС</th>
+        <th scope="col">Статус смены</th>
+        <th scope="col">Время начала смены</th>
+        <th scope="col">Время окончания смены</th>
+        <th scope="col">Выполнено заказов за смену</th>
+        <th scope="col">Общая выручка за смену, руб.</th>
+
+        {% for shift in shifts %}
+        <tr>
+            <td>{{ shift.shift_code }}</td>
+            <td>{{ shift.driver_id.fio }}</td>
+            <td>{{ shift.driver_id.city }}</td>
+            <td>{{ shift.vehicle_id.model }}</td>
+            <td>{{ shift.vehicle_id.reg_number }}</td>
+            <td>
+                {% if shift.shift_end_date %}
+                    Завершена
+                {% else %}
+                    Активна
+                {% endif %}
+            </td>
+            <td>{{ shift.shift_begin_date }}</td>
+            <td>
+                {% if shift.shift_end_date %}
+                    {{ shift.shift_begin_date }}
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+            <td>{{ shift.orders_count }}</td>
+            <td>{{ shift.total_orders_cost }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
